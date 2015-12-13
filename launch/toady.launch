@@ -1,0 +1,39 @@
+<launch>
+  <!-- change this next line to include the launch file for your robot's hardware drivers:
+  <include file="$(find knex_ros)/launch/knex_arduino_ser.launch" />
+  -->
+
+ <param name="robot_description" textfile="/home/thieri/rosbuild_ws/launch/toady.urdf" />
+
+  <!-- 	######################
+	####   Sensoren   ####	
+	######################	
+	 IN:	...
+	 OUT: 	/xxxxxx tooo much!
+	#################### -->
+  		<include file="/home/thieri/rosbuild_ws/launch/sensors_only.launch"/>
+  <!--  #################### -->
+
+
+  <!-- 	############################
+	####   Visualisierung   ####	
+	############################
+	 IN:	...
+	 OUT: 	/xxxxxx tooo much!
+	#################### -->
+  		<include file="/home/thieri/rosbuild_ws/launch/visu_only.launch"/>
+  <!--  #################### -->
+
+
+  <!-- 	#####################
+	####   Mapping   ####	
+	#####################
+	 IN:	...
+	 OUT: 	/xxxxxx tooo much!
+	#################### -->
+  		<include file="/home/thieri/rosbuild_ws/launch/mapping.launch"/>
+  <!--  #################### -->
+
+
+
+</launch>
