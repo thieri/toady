@@ -1,0 +1,26 @@
+<launch>
+  <!-- change this next line to include the launch file for your robot's hardware drivers:
+  <include file="$(find knex_ros)/launch/knex_arduino_ser.launch" />
+  -->
+
+ <param name="robot_description" textfile="/home/thieri/rosbuild_ws/launch/toady.urdf" />
+
+
+  <!-- 	####################
+	#### SICK ##########
+	####################	
+	 IN:	...
+	 OUT: 	/scan 		@ 5Hz
+		/diagnostics_sick
+	#################### -->
+		<node pkg="sicktoolbox_pls_wrapper" type="sick_pls_wrapper" name="scan_SICK" respawn="false" >
+		     <rosparam param="port">/dev/sick</rosparam>
+		     <rosparam param="baud">38400</rosparam>
+		     <rosparam param="resolution">0.5</rosparam>
+		     <rosparam param="use_rep_117">true</rosparam>
+		 	     <remap from="diagnostics" to="diagnostics_sick"/>
+		</node>
+
+  <!--  #################### -->
+
+</launch>
