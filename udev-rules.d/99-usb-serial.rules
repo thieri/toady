@@ -1,0 +1,7 @@
+SUBSYSTEM=="tty", ATTRS{idVendor}=="2341", ATTRS{idProduct}=="8037", ATTRS{version}==" 2.00", SYMLINK+="micro/%b"
+# nicht nötig Metro hat ftdi SUBSYSTEM=="tty", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6015", ATTRS{version}==" 2.00", SYMLINK+="metro/%b"
+
+SUBSYSTEM=="tty", ATTRS{idVendor}=="067b", ATTRS{idProduct}=="2303", ATTRS{version}==" 1.10", MODE:="0666", SYMLINK+="ttyUSB2Serial"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6001", ATTRS{serial}=="A5027ZDQ", SYMLINK+="razorimu"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6001", ATTRS{serial}=="AI023QKO", SYMLINK+="sick"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="16c0", ATTRS{idProduct}=="0483", ATTRS{serial}=="12345", SYMLINK+="neato"
