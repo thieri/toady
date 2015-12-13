@@ -1,0 +1,42 @@
+<launch>
+    <group ns="R200">
+	<arg name="cHeight" default="480" />
+	<arg name="cWidth" default="640" />
+	<arg name="dHeight" default="360" />
+	<arg name="dWidth" default="480" />
+	<arg name="colorCamera" default="/dev/video1" />
+	<arg name="depthCamera" default="/dev/video2" />
+	<arg name="pcScale" default="1000" />
+	<arg name="enableDepth" default="1" />
+	<arg name="enableColor" default="1" />
+	<arg name="directory" default="0" />
+	<arg name="playFromFile" default="0" />
+	<arg name="recordToFile" default="0" />
+	<arg name="serialNumber" default="-1" />
+	<arg name="cFPS" default="30" />
+	<arg name="dFPS" default="30" />
+	
+  	<node pkg="nodelet" type="nodelet" name="Intel_R200"  args="manager" output="screen"/>
+  	
+	<node pkg="nodelet" type="nodelet" name="Intel_R200_Nodelet"
+        args="load r200_ros/CR200Nodelet Intel_R200 
+        pcScale $(arg pcScale)
+        cHeight $(arg cHeight) 
+        cWidth $(arg cWidth)
+        dHeight $(arg dHeight)
+        cFPS $(arg cFPS)
+        dFPS $(arg dFPS)
+        dWidth $(arg dWidth)
+        colorCamera $(arg colorCamera)
+        depthCamera $(arg depthCamera)
+        enableColor $(arg enableColor)
+        enableDepth $(arg enableDepth)
+        directory $(arg directory)
+        playFromFile $(arg playFromFile)
+        recordToFile $(arg recordToFile)
+        serialNumber $(arg serialNumber)">
+  	</node>
+  	
+  	
+    </group>   
+</launch> 
