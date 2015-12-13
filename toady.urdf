@@ -1,0 +1,459 @@
+<robot name="toady">
+
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <box size="0.2 0.7 0.2"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <material name="white">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <inertial>
+      <mass value="120"/>
+      <inertia ixx="16.9" ixy="0.0" ixz="0.0" iyy="19.3" iyz="0.0" izz="13.0"/>
+    </inertial>
+  </link>
+
+
+ 
+  <link name="fahrwerk_link">
+    <visual>
+      <geometry>
+        <mesh filename="file:///home/thieri/rosbuild_ws/launch/fahrwerk.stl" scale=".010 .010 .010" />
+      </geometry>
+      <origin rpy="0 0 -1.5708" xyz="0 0 0"/>
+      <material name="gray">
+        <color rgba=".5 .5 .5 1"/>
+      </material>
+    </visual>
+  </link>
+  
+  <joint name="base_fahrwerk_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="fahrwerk_link"/>
+    <origin xyz="0.23 0 0.15" rpy="0 0 0"/>
+  </joint>
+
+
+  <link name="lwheel_link">
+    <visual>
+      <geometry>
+        <cylinder length="0.1" radius="0.16"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <material name="black">
+        <color rgba="0 0 0 1"/>
+      </material>
+    </visual>
+  </link>
+  
+  <joint name="fahrwerk_lwheel_joint" type="fixed">
+    <parent link="fahrwerk_link"/>
+    <child link="lwheel_link"/>
+    <origin xyz="-0.23 0.35 0" rpy="1.5708 0 0"/>
+  </joint>
+  
+  <link name="rwheel_link">
+    <visual>
+      <geometry>
+        <cylinder length="0.1" radius="0.16"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <material name="black">
+        <color rgba="0 0 0 1"/>
+      </material>
+    </visual>
+  </link>
+  
+  <joint name="fahrwerk_rwheel_joint" type="fixed">
+    <parent link="fahrwerk_link"/>
+    <child link="rwheel_link"/>
+    <origin xyz="-0.23 -0.35 0" rpy="-1.5708 0 0"/>
+  </joint>
+
+  <link name="backwheel_link">
+    <visual>
+      <geometry>
+        <cylinder length="0.1" radius="0.12"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <material name="black">
+        <color rgba="0 0 0 1"/>
+      </material>
+    </visual>
+  </link>
+  
+  <joint name="fahrwerk_backwheel_joint" type="fixed">
+    <parent link="fahrwerk_link"/>
+    <child link="backwheel_link"/>
+    <origin xyz="-0.95 0.0 -0.03" rpy="1.5708 0 0"/>
+  </joint>
+
+  <link name="shell_link">
+    <visual>
+      <geometry>
+        <box size="1.35 1.0 0.45"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <material name="green">
+        <color rgba="0 .9 0 .1"/>
+      </material>
+    </visual>
+   <collision>
+      <geometry>
+        <box size="1.35 1.0 0.45"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <joint name="fahrwerk_shell_joint" type="fixed">
+    <parent link="fahrwerk_link"/>
+    <child link="shell_link"/>
+    <origin xyz="-0.3 0.0 0.385" rpy="0 0 0"/>
+  </joint>
+
+
+
+
+
+
+  <link name="laser">
+    <visual>
+      <geometry>
+        <mesh filename="file:///home/thieri/rosbuild_ws/launch/sick.stl" scale=".010 .010 .010" />
+      </geometry>
+      <origin rpy="1.57079633 0 -1.57079633" xyz="0 0 0"/>
+      <material name="yellow">
+        <color rgba="0 0.7 0.7 1"/>
+      </material>
+    </visual>
+  </link>
+  
+  <joint name="fahrwerk_laser_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="laser"/>
+    <origin xyz="0.19 0 0.15" rpy="0 0 0"/>
+    # 0.19 0 0.16
+  </joint>
+
+  <link name="neato">
+    <visual>
+      <geometry>
+        <box size="0.1 0.1 0.1"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <material name="black">
+        <color rgba="0 0 0 1"/>
+      </material>
+    </visual>
+  </link>
+  
+  <joint name="fahrwerk_neato_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="neato"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    # 0.19 0 0.16
+  </joint>
+
+
+  <link name="cam_carrier_front_link">
+    <visual>
+      <geometry>
+        <box size="0.025 0.27 0.025"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <material name="white">
+        <color rgba="255 255 255 1"/>
+      </material>
+    </visual>
+  </link>
+  
+  <joint name="fahrwerk_cam_carrier_front_joint" type="fixed">
+    <parent link="fahrwerk_link"/>
+    <child link="cam_carrier_front_link"/>
+    <origin xyz="0.03 0 0.08" rpy="0 0 0"/>
+  </joint>
+
+
+
+  <link name="xtion_link">
+    <visual>
+      <geometry>
+        <box size="0.05 0.25 0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <material name="black">
+        <color rgba="0 0 0 1"/>
+      </material>
+    </visual>
+  </link>
+  
+  <joint name="base_xtion_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="xtion_link"/>
+    <origin xyz="0.3 0 0.3" rpy="0 0 0"/>
+  </joint>
+
+
+
+
+  <link name="Realsense_R200_frame">
+    <visual>
+      <geometry>
+        <box size="0.01 0.15 0.02"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <material name="black">
+        <color rgba="0 0 0 1"/>
+      </material>
+    </visual>
+  </link>
+
+  <joint name="cam_carrier_front_RealsenseR200_joint" type="fixed">
+    <parent link="cam_carrier_front_link"/>
+    <child link="Realsense_R200_frame"/>
+    <origin xyz="0.02 0 0" rpy="0 0 0"/>
+  </joint>
+
+  <link name="camera_depth_optical_frame">
+    <visual>
+      <geometry>
+        <box size="0.05 0.05 0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <material name="black">
+        <color rgba="0 0 0 1"/>
+      </material>
+    </visual>
+  </link>
+
+  <joint name="IntelR200_Depth_joint" type="fixed">
+    <parent link="Realsense_R200_frame"/>
+    <child link="camera_depth_optical_frame"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+
+  <link name="camera_color_optical_frame">
+    <visual>
+      <geometry>
+        <box size="0.05 0.05 0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <material name="black">
+        <color rgba="0 0 0 1"/>
+      </material>
+    </visual>
+  </link>
+  
+  <joint name="IntelR200_Col_joint" type="fixed">
+    <parent link="Realsense_R200_frame"/>
+    <child link="camera_color_optical_frame"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+
+  <link name="realsense_frame">
+    <visual>
+      <geometry>
+        <box size="0.01 0.01 0.01"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <material name="black">
+        <color rgba="0 0 0 1"/>
+      </material>
+    </visual>
+  </link>
+
+  <joint name="IntelR200_Realsense_joint" type="fixed">
+    <parent link="Realsense_R200_frame"/>
+    <child link="realsense_frame"/>
+    <origin xyz="0 0 0" rpy="-1.57079633 0 -1.57079633"/>
+  </joint>
+
+  <link name="R200_upper_frame">
+    <visual>
+      <geometry>
+        <box size="0.05 0.05 0.05"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <material name="green">
+        <color rgba="0 255 0 1"/>
+      </material>
+    </visual>
+  </link>
+  
+  <joint name="Realsense_R200_R200_upper_joint" type="fixed">
+    <parent link="Realsense_R200_frame"/>
+    <child link="R200_upper_frame"/>
+    <origin xyz="0 0 0" rpy="0 -0.262 0"/>
+  </joint>
+
+  <link name="R200_mid_frame">
+    <visual>
+      <geometry>
+        <box size="0.05 0.05 0.05"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <material name="blue">
+        <color rgba="85 85 255 1"/>
+      </material>
+    </visual>
+  </link>
+  
+  <joint name="Realsense_R200_R200_mid_joint" type="fixed">
+    <parent link="Realsense_R200_frame"/>
+    <child link="R200_mid_frame"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+
+  <link name="R200_lower_frame">
+    <visual>
+      <geometry>
+        <box size="0.05 0.05 0.05"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <material name="red">
+        <color rgba="255 0 0 1"/>
+      </material>
+    </visual>
+  </link>
+  
+  <joint name="Realsense_R200_R200_lower_joint" type="fixed">
+    <parent link="Realsense_R200_frame"/>
+    <child link="R200_lower_frame"/>
+    <origin xyz="0 0 0" rpy="0 0.262 0"/>
+  </joint>
+
+
+
+
+
+
+
+
+
+  <link name="camera_link">
+    <visual>
+      <geometry>
+        <box size="0.05 0.05 0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <material name="red">
+        <color rgba="1 0 0 1"/>
+      </material>
+    </visual>
+  </link>
+  
+  <joint name="base_camera_link" type="fixed">
+    <parent link="base_link"/>
+    <child link="camera_link"/>
+    <origin xyz="0.3 0 0.3" rpy="0 0 0"/>
+  </joint>
+
+  <link name="camera">
+    <visual>
+      <geometry>
+        <box size="0.05 0.05 0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <material name="red">
+        <color rgba="1 0 0 1"/>
+      </material>
+    </visual>
+  </link>
+  <link name="left_camera">
+    <visual>
+      <geometry>
+        <box size="0.05 0.05 0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <material name="red">
+        <color rgba="1 0 0 1"/>
+      </material>
+    </visual>
+  </link>
+  <link name="middle_camera">
+    <visual>
+      <geometry>
+        <box size="0.05 0.05 0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <material name="red">
+        <color rgba="1 0 0 1"/>
+      </material>
+    </visual>
+  </link>
+  <link name="right_camera">
+    <visual>
+      <geometry>
+        <box size="0.05 0.05 0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <material name="red">
+        <color rgba="1 0 0 1"/>
+      </material>
+    </visual>
+  </link>
+  <joint name="base_stereo_link" type="fixed">
+    <parent link="base_link"/>
+    <child link="camera"/>
+    <origin xyz="0.3 0.1 0.3" rpy="-1.57079633 0 -1.57079633"/>
+  </joint>
+  <joint name="base_stereo_link_left" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_camera"/>
+    <origin xyz="0.3 0.1 0.3" rpy="-1.57079633 0 -1.57079633"/>
+  </joint>
+  <joint name="base_stereo_link_middle" type="fixed">
+    <parent link="base_link"/>
+    <child link="middle_camera"/>
+    <origin xyz="0.3 0 0.3" rpy="-1.57079633 0 -1.57079633"/>
+  </joint>
+  <joint name="base_stereo_link_right" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_camera"/>
+    <origin xyz="0.3 -0.1 0.3" rpy="-1.57079633 0 -1.57079633"/>
+  </joint>
+
+  <joint name="base_imu_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="imu"/>
+    <origin xyz="0.19 0 0.16" rpy="0 0 0"/>
+  </joint>
+
+  <link name="imu">
+    <visual>
+      <geometry>
+        <box size="0.05 0.05 0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <material name="red">
+        <color rgba="1 0 0 1"/>
+      </material>
+    </visual>
+  </link>
+
+  <joint name="base_imu_link_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="base_imu_link"/>
+    <origin xyz="0.19 0 0.16" rpy="0 0 0"/>
+  </joint>
+
+  <link name="base_imu_link">
+    <visual>
+      <geometry>
+        <box size="0.05 0.05 0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <material name="red">
+        <color rgba="1 0 0 1"/>
+      </material>
+    </visual>
+  </link>
+
+</robot>
+
+
+
+
