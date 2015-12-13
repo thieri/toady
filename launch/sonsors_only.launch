@@ -1,0 +1,295 @@
+<launch>
+  <!-- change this next line to include the launch file for your robot's hardware drivers:
+  <include file="$(find knex_ros)/launch/knex_arduino_ser.launch" />
+  -->
+
+ <param name="robot_description" textfile="/home/thieri/rosbuild_ws/launch/toady.urdf" />
+
+  <!-- ############## SENSOREN ############  -->
+
+  <!-- 	######################
+	####   Neato       ###	
+	######################	
+	 IN:	...
+	 OUT: 	/xxxxxx tooo much!
+	###################### -->
+
+<!-- rosrun xv_11_laser_driver neato_laser_publisher _port:=/dev/neato _firmware_version:=2 -->
+		<node pkg="xv_11_laser_driver" type="neato_laser_publisher" name="neato_laser_publisher" output="screen" respawn="true" >   
+		     <rosparam param="port">/dev/neato</rosparam>
+		     <rosparam param="firmware_version">2</rosparam>
+		     <rosparam param="frame_id">neato</rosparam>
+	 	     <remap from="scan" to="scan_neato"/>
+		</node>
+  <!--  ###################### -->
+
+
+  <!-- 	######################
+	####   Realsense   ###	
+	######################	
+	 IN:	...
+	 OUT: 	/xxxxxx tooo much!
+	###################### -->
+<!--  		<include file="$(find realsense)/realsense_r200_toady.launch"/>
+-->  <!--  ###################### -->
+
+
+  <!-- 	####################
+	####   OpenNI ######	
+	####################	
+	 IN:	...
+	 OUT: 	/xxxxxx tooo much!
+	#################### -->
+<!--  		<include file="$(find openni_launch)/launch/opennitoady.launch"/>	-->
+  <!--  #################### -->
+
+
+  <!-- 	########################
+	####   UVC Camera ######	Rechts video2
+	########################	
+	 IN:	...
+	 OUT: 	/cam_blau/image_raw
+	#################### -->
+<!--		<include file="$(find uvc_camera)/launch/PS3EyeRIGHT.launch"/>		-->
+  <!--  #################### -->
+
+  <!-- 	########################
+	####   UVC Camera ######	Mitte video1
+	########################	
+	 IN:	...
+	 OUT: 	/cam_gruen/image_raw
+	#################### -->
+<!--		<include file="$(find uvc_camera)/launch/PS3EyeMIDDLE.launch"/>		-->
+  <!--  #################### -->
+
+
+  <!-- 	########################
+	####   UVC Camera ######	Links video0
+	########################	
+	 IN:	...
+	 OUT: 	/cam_gruen/image_raw
+	#################### -->
+<!--		<include file="$(find uvc_camera)/launch/PS3EyeLEFT.launch"/>		-->
+  <!--  #################### -->
+
+
+  <!-- 	########################
+	####   UVC Camera ######	stereo_aussen
+	########################	
+	 IN:	...
+	 OUT: 	/stereo/image_raw
+	#################### -->
+<!--FAHRTESTS		<include file="$(find uvc_camera)/launch/stereo_PSEye_nodeAUSSEN.launch"/>		-->
+  <!--  #################### -->
+
+  <!-- 	####################
+	#### RazorIMU ######
+	####################	
+	 IN:	...
+	 OUT: 	/imu 		@ 48Hz
+	#################### -->
+
+		<node pkg="razor_imu_9dof" type="imu_node.py" name="razorIMU" output="screen" respawn="false">
+			    <rosparam file="$(find razor_imu_9dof)/config/my_razor.yaml" command="load"/>
+  		</node>
+	<!-- mit gui -->
+	<!--	<node pkg="razor_imu_9dof" type="display_3D_visualization.py" name="display_3D_visualization_node" output="screen">
+		</node>
+	-->
+  <!--  #################### -->
+
+
+
+
+  <!-- 	####################
+	#### SICK ########## 			SICK-LOADER!!!
+	####################	
+	 IN:	...
+	 OUT: 	/scan 		@ 5Hz
+		/diagnostics_sick
+	#################### -->
+		<node pkg="toady" type="sick_starter.sh" name="SICK_Loader" output="screen" respawn="false" >
+		</node>
+  <!--  #################### -->
+
+
+  <!-- 	##############################
+	#### /ArduinoMicro's&Teensy ## 
+	##############################	
+	 IN:	/lmotor_cmd
+		/rmotor_cmd
+		/SICK
+		/SABER
+	 OUT: 	/lwheel			@ 10Hz
+		/rwheel			@ 10Hz
+	#################### -->
+	 	<node pkg="rosserial_python" type="serial_node.py" name="ArduinoMicroACM0" output="screen" respawn="true">
+		     <rosparam param="port">/dev/ttyACM0</rosparam>
+		 	     <remap from="diagnostics" to="diagnostics_ACM0"/>
+		</node>
+	 	<node pkg="rosserial_python" type="serial_node.py" name="ArduinoMicroACM1" output="screen" respawn="true">
+		     <rosparam param="port">/dev/ttyACM1</rosparam>
+		 	     <remap from="diagnostics" to="diagnostics_ACM1"/>
+		</node>
+	 	<node pkg="rosserial_python" type="serial_node.py" name="ArduinoMicroACM2" output="screen" respawn="true">
+		     <rosparam param="port">/dev/ttyACM2</rosparam>
+		 	     <remap from="diagnostics" to="diagnostics_ACM2"/>
+		</node>
+<!--	 	<node pkg="rosserial_python" type="serial_node.py" name="TeensyUSB0" output="screen" respawn="true">
+		     <rosparam param="port">/dev/ttyUSB0</rosparam>
+		 	     <remap from="diagnostics" to="diagnostics_USB0"/>
+		</node>
+-->
+  <!--  #################### -->
+
+
+  <!-- 	####################
+	#### diff_tf ####### 
+	####################	
+	 IN:	/lwheel
+		/rwheel
+	 OUT: 	/odom		@ 10Hz
+		/tf		@ 10Hz
+	####################			ehemals 3900 / m
+ -->
+		<rosparam param="ticks_meter">20313</rosparam>
+		<rosparam param="vel_threshold">0.0001</rosparam>
+		<node pkg="differential_drive" type="diff_tf.py" name="diff_drive" output="screen" respawn="true">
+		     <rosparam param="rate">10</rosparam>
+		     <rosparam param="base_width">0.73</rosparam>
+		     <rosparam param="encoder_min">-32768</rosparam>
+		     <rosparam param="encoder_max">32767</rosparam>
+		     <rosparam param="odom_frame_id">odom</rosparam>
+		</node>
+  <!--  #################### -->
+
+
+
+  <!-- 	####################
+	#### state publisher ####### 
+	####################	
+	 IN:	urdf
+	 OUT: 	/tf    static	@ 50Hz
+	#################### -->
+		  <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" output="screen" respawn="true"> 
+		  </node>
+  <!--  #################### -->
+
+
+
+
+  <!-- 	####################
+	#### pid_velocity LEFT ## 
+	####################	
+	 IN:	/lwheel_vtarget
+		/lwheel
+	 OUT: 	/lwheel_vel	@ strange?
+		/lmotor_cmd	@ strange?
+	#################### -->
+
+<!--	Kann weg, da Kangaroo!
+	  <node pkg="differential_drive" type="pid_velocity.py" name="lpid_velocity" output="screen" respawn="true">
+	      <remap from="wheel" to="lwheel"/>
+	      <remap from="motor_cmd" to="lmotor_cmd"/>
+	      <remap from="wheel_vtarget" to="lwheel_vtarget"/>
+	      <remap from="wheel_vel" to="lwheel_vel"/>
+	      <rosparam param="Kp">80</rosparam>
+	      <rosparam param="Ki">0.3</rosparam>
+	      <rosparam param="Kd">0</rosparam>
+	      <rosparam param="out_min">-126</rosparam>
+	      <rosparam param="out_max">126</rosparam>
+	      <rosparam param="rate">10</rosparam>
+	      <rosparam param="timeout_ticks">4</rosparam>
+	      <rosparam param="rolling_pts">6</rosparam>
+		     <rosparam param="encoder_min">-32768</rosparam>
+		     <rosparam param="encoder_max">32767</rosparam>
+	  </node>
+-->
+  <!--  #################### -->
+
+
+
+
+  <!-- 	####################
+	#### pid_velocity RIGHT ## 
+	####################	
+	 IN:	/rwheel_vtarget
+		/rwheel
+	 OUT: 	/rwheel_vel	@ strange?
+		/rmotor_cmd	@ strange?
+	#################### -->
+<!--	Kann weg, da Kangaroo!
+	  <node pkg="differential_drive" type="pid_velocity.py" name="rpid_velocity" output="screen" respawn="true">
+	      <remap from="wheel" to="rwheel"/>
+	      <remap from="motor_cmd" to="rmotor_cmd"/>
+	      <remap from="wheel_vtarget" to="rwheel_vtarget"/>
+	      <remap from="wheel_vel" to="rwheel_vel"/>
+	      <rosparam param="Kp">80</rosparam>
+	      <rosparam param="Ki">0.3</rosparam>
+	      <rosparam param="Kd">0</rosparam>
+	      <rosparam param="out_max">126</rosparam>
+	      <rosparam param="out_min">-126</rosparam>
+	      <rosparam param="rate">10</rosparam>
+	      <rosparam param="timeout_ticks">4</rosparam>
+	      <rosparam param="rolling_pts">6</rosparam>
+		     <rosparam param="encoder_min">-32768</rosparam>
+		     <rosparam param="encoder_max">32767</rosparam>
+	  </node>
+-->
+  <!--  #################### -->
+
+
+
+
+  <!-- 	####################
+	#### virt. joystick ## 
+	####################	
+	 IN:	...
+	 OUT: 	/virt_joy_twist		@ variable
+			x_... = vor/zurück in m/sec  5.5=20kmh 2=7kmh
+			r_.. = L/R in m/sec		1=57°/sec
+	#################### -->
+<!--	jetzt in visu!!!
+	  <node pkg="differential_drive" type="virtual_joystick.py" name="virtual_joystick" output="screen">
+	      <rosparam param="x_min">-1.0</rosparam>
+	      <rosparam param="x_max">1.0</rosparam>
+	      <rosparam param="r_min">-1.5</rosparam>
+	      <rosparam param="r_max">1.5</rosparam>
+ 	      <remap from="twist" to="twist_virt_joy"/>
+	  </node>
+-->
+  <!--  #################### -->
+
+
+
+  <!-- 	####################
+	#### Quellwahl    ## 
+	####################	
+	 IN:	/xyz_twist
+	 OUT: 	/twist		@ variable
+			x_... = vor/zurück in m/sec  5.5=20kmh 2=7kmh
+			r_.. = L/R in m/sec		1=57°/sec
+	#################### -->
+	  <node pkg="quellwahl" type="quellwahl.py" name="Quellenauswahl" output="screen">
+ 	      <remap from="topicQuelleA" to="twist_virt_joy"/>
+ 	      <remap from="topicQuelleB" to="twist_joy"/>
+	  </node>
+  <!--  #################### -->
+
+
+  <!-- 	####################
+	#### twist_to_motors ## 
+	####################	
+	 IN:	/twist
+	 OUT: 	/rwheel_vtarget		@ strange?
+		/lwheel_vtarget		@ strange?
+	#################### -->
+<!--	Kann weg, da Kangaroo!
+	  <node pkg="differential_drive" type="twist_to_motors.py" name="twist_to_motors" output="screen" respawn="true">
+	    <rosparam param="base_width">0.73</rosparam>
+	  </node>
+-->
+  <!--  #################### -->
+
+
+</launch>
