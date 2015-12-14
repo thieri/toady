@@ -123,21 +123,21 @@
 	 OUT: 	/lwheel			@ 10Hz
 		/rwheel			@ 10Hz
 	#################### -->
-	 	<node pkg="rosserial_python" type="serial_node.py" name="ArduinoMicroACM0" output="screen" respawn="true">
-		     <rosparam param="port">/dev/ttyACM0</rosparam>
-		 	     <remap from="diagnostics" to="diagnostics_ACM0"/>
+	 	<node pkg="rosserial_python" type="serial_node.py" name="ArduinoMicro0" output="screen" respawn="true">
+		     <rosparam param="port">/dev/micro/0</rosparam>
+		 	     <remap from="diagnostics" to="diagnostics_micro0"/>
 		</node>
-	 	<node pkg="rosserial_python" type="serial_node.py" name="ArduinoMicroACM1" output="screen" respawn="true">
-		     <rosparam param="port">/dev/ttyACM1</rosparam>
-		 	     <remap from="diagnostics" to="diagnostics_ACM1"/>
+	 	<node pkg="rosserial_python" type="serial_node.py" name="ArduinoMicro1" output="screen" respawn="true">
+		     <rosparam param="port">/dev/micro/1</rosparam>
+		 	     <remap from="diagnostics" to="diagnostics_micro1"/>
 		</node>
-	 	<node pkg="rosserial_python" type="serial_node.py" name="ArduinoMicroACM2" output="screen" respawn="true">
-		     <rosparam param="port">/dev/ttyACM2</rosparam>
-		 	     <remap from="diagnostics" to="diagnostics_ACM2"/>
+	 	<node pkg="rosserial_python" type="serial_node.py" name="ArduinoMicro2" output="screen" respawn="true">
+		     <rosparam param="port">/dev/micro/2</rosparam>
+		 	     <remap from="diagnostics" to="diagnostics_micro2"/>
 		</node>
-<!--	 	<node pkg="rosserial_python" type="serial_node.py" name="TeensyUSB0" output="screen" respawn="true">
-		     <rosparam param="port">/dev/ttyUSB0</rosparam>
-		 	     <remap from="diagnostics" to="diagnostics_USB0"/>
+<!--	 	<node pkg="rosserial_python" type="serial_node.py" name="teensyDisJoy" output="screen" respawn="true">
+		     <rosparam param="port">/dev/teensyDisJoy</rosparam>
+		 	     <remap from="diagnostics" to="diagnostics_teensyDisJoy"/>
 		</node>
 -->
   <!--  #################### -->
