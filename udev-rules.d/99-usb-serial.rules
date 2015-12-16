@@ -22,13 +22,13 @@ SUBSYSTEM=="tty", ATTRS{idVendor}=="2341", ATTRS{idProduct}=="8037", ATTRS{versi
 # nicht nötig Metro hat ftdi 
 # SUBSYSTEM=="tty", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6015", ATTRS{version}==" 2.00", SYMLINK+="metro/%b"
 
-# ### USB-Serial Kabel schwarz #####
+# ### USB-Serial Kabel durchsichtig #####
 SUBSYSTEM=="tty", ATTRS{idVendor}=="067b", ATTRS{idProduct}=="2303", ATTRS{version}==" 1.10", MODE:="0666", SYMLINK+="ttyUSB2Serial"
 
 # ### Razor IMU #####
 SUBSYSTEM=="tty", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6001", ATTRS{serial}=="A5027ZDQ", SYMLINK+="razorimu"
 
-# ### USB-Serial Kabel durchsichtig #####
+# ### USB-Serial Kabel schwarz #####
 SUBSYSTEM=="tty", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6001", ATTRS{serial}=="AI023QKO", SYMLINK+="sick"
 
 # ### Teensy 2 - Neato Sensor #####
