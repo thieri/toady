@@ -1,0 +1,1 @@
+/home/thieri/indigo_workspace/launch/sick_starter.sh

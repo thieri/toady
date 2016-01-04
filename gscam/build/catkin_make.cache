@@ -1,0 +1,2 @@
+.
+-DCATKIN_DEVEL_PREFIX=/home/thieri/Dropbox/Bauprojekte/Schildkrote/Elektronik/ps4eye/gscam/devel -DCMAKE_INSTALL_PREFIX=/home/thieri/Dropbox/Bauprojekte/Schildkrote/Elektronik/ps4eye/gscam/install -G Unix Makefiles

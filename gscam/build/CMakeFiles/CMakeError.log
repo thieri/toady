@@ -1,0 +1,53 @@
+Determining if the pthread_create exist failed with the following output:
+Change Dir: /home/thieri/Dropbox/Bauprojekte/Schildkrote/Elektronik/ps4eye/longjie/ps4eye-master/gscam/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec3765002866/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec3765002866.dir/build.make CMakeFiles/cmTryCompileExec3765002866.dir/build
+make[1]: Verzeichnis »/home/thieri/Dropbox/Bauprojekte/Schildkrote/Elektronik/ps4eye/longjie/ps4eye-master/gscam/build/CMakeFiles/CMakeTmp« wird betreten
+/usr/bin/cmake -E cmake_progress_report /home/thieri/Dropbox/Bauprojekte/Schildkrote/Elektronik/ps4eye/longjie/ps4eye-master/gscam/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec3765002866.dir/CheckSymbolExists.c.o
+/usr/bin/cc    -o CMakeFiles/cmTryCompileExec3765002866.dir/CheckSymbolExists.c.o   -c /home/thieri/Dropbox/Bauprojekte/Schildkrote/Elektronik/ps4eye/longjie/ps4eye-master/gscam/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTryCompileExec3765002866
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3765002866.dir/link.txt --verbose=1
+/usr/bin/cc       CMakeFiles/cmTryCompileExec3765002866.dir/CheckSymbolExists.c.o  -o cmTryCompileExec3765002866 -rdynamic 
+CMakeFiles/cmTryCompileExec3765002866.dir/CheckSymbolExists.c.o: In Funktion `main':
+CheckSymbolExists.c:(.text+0x16): Nicht definierter Verweis auf `pthread_create'
+collect2: error: ld returned 1 exit status
+make[1]: Verzeichnis »/home/thieri/Dropbox/Bauprojekte/Schildkrote/Elektronik/ps4eye/longjie/ps4eye-master/gscam/build/CMakeFiles/CMakeTmp« wird verlassen
+make[1]: *** [cmTryCompileExec3765002866] Fehler 1
+make: *** [cmTryCompileExec3765002866/fast] Fehler 2
+
+File /home/thieri/Dropbox/Bauprojekte/Schildkrote/Elektronik/ps4eye/longjie/ps4eye-master/gscam/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <pthread.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef pthread_create
+  return ((int*)(&pthread_create))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/thieri/Dropbox/Bauprojekte/Schildkrote/Elektronik/ps4eye/longjie/ps4eye-master/gscam/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec27677245/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec27677245.dir/build.make CMakeFiles/cmTryCompileExec27677245.dir/build
+make[1]: Verzeichnis »/home/thieri/Dropbox/Bauprojekte/Schildkrote/Elektronik/ps4eye/longjie/ps4eye-master/gscam/build/CMakeFiles/CMakeTmp« wird betreten
+/usr/bin/cmake -E cmake_progress_report /home/thieri/Dropbox/Bauprojekte/Schildkrote/Elektronik/ps4eye/longjie/ps4eye-master/gscam/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec27677245.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTryCompileExec27677245.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-2.8/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec27677245
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec27677245.dir/link.txt --verbose=1
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTryCompileExec27677245.dir/CheckFunctionExists.c.o  -o cmTryCompileExec27677245 -rdynamic -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+make[1]: *** [cmTryCompileExec27677245] Fehler 1
+make[1]: Verzeichnis »/home/thieri/Dropbox/Bauprojekte/Schildkrote/Elektronik/ps4eye/longjie/ps4eye-master/gscam/build/CMakeFiles/CMakeTmp« wird verlassen
+make: *** [cmTryCompileExec27677245/fast] Fehler 2
+
+

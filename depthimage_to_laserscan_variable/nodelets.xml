@@ -1,0 +1,11 @@
+<library path="lib/libDepthImageToLaserScanNodeletVariable">
+
+  <class name="depthimage_to_laserscan_variable/DepthImageToLaserScanNodeletVariable"
+	 type="depthimage_to_laserscan_variable::DepthImageToLaserScanNodeletVariable"
+	 base_class_type="nodelet::Nodelet">
+    <description>
+      Nodelet to convert raw depth images to sensor_msgs/LaserScans.
+    </description>
+  </class>
+
+</library>

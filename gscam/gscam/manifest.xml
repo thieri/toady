@@ -1,0 +1,14 @@
+<package>
+  <description brief="gscam">
+
+     gscam
+
+  </description>
+  <author>Thieri</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/gscam</url>
+
+</package>
+
+

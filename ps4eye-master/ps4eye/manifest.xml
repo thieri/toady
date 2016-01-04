@@ -1,0 +1,14 @@
+<package>
+  <description brief="ps4eye">
+
+     ps4eye
+
+  </description>
+  <author>Thieri</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/ps4eye</url>
+
+</package>
+
+
